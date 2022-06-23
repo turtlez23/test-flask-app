@@ -1,21 +1,13 @@
-[uwsgi]
-base = /var/www/html/test_flask_app
-app = run
-module = %(app)
+[Unit]
+Description=uWSGI test_flask_app
 
-home =%(base)/venv
-pythonpath = %(base)
+[Service]
+ExecStart=/var/www/test_flask_app/venv/bin/uwsgi --master --emperor /var/www/html/test_flask_app/uwsgi.ini --die-on-term -
+-uid ubuntu --gid ubuntu --logto /var/www/html/test_flask_app/log/emperor.log
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
 
-socket = %(base)/socket.sock
-
-chmod-socket = 777
-
-processes = 2
-
-threads = 2
-
-harakiri = 15
-
-callable = app
-
-logto = /var/www/html/test_flask_app/log/%n.log
+[Install]
+WantedBy=multi-user.target
