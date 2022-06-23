@@ -2,8 +2,7 @@
 Description=uWSGI test_flask_app
 
 [Service]
-ExecStart=/var/www/test_flask_app/venv/bin/uwsgi --master --emperor /var/www/html/test_flask_app/uwsgi.ini --die-on-term -
--uid ubuntu --gid ubuntu --logto /var/www/html/test_flask_app/log/emperor.log
+ExecStart=/var/www/test_flask_app/venv/bin/uwsgi --master --emperor /var/www/html/test_flask_app/uwsgi.ini --die-on-term --uid ubuntu --gid ubuntu --logto /var/www/html/test_flask_app/log/emperor.log
 Restart=always
 KillSignal=SIGQUIT
 Type=notify
